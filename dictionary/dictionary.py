@@ -24,4 +24,9 @@ def translate(word):
 
 word = input('Give me word:')
 
-print(translate(word))
+output = translate(word)
+
+if type(output) ==list:
+  [print("%s) %s"%(i, a)) for i, a in enumerate(output)]
+else:
+  print(output)
