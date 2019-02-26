@@ -1,6 +1,7 @@
 import json
 from difflib import get_close_matches
 
+working = True
 data = json.load(open("../dictionary/data.json"))
 
 def translate(word):
@@ -26,11 +27,16 @@ def translate(word):
   else:
     return "The word doesn't exist"
 
-word = input('Give me word:')
+while working == True:
+  word = input('Give me word:')
 
-output = translate(word)
+  output = translate(word)
 
-if type(output) ==list:
-  [print("%s) %s"%(i, a)) for i, a in enumerate(output)]
-else:
-  print(output)
+  if type(output) ==list:
+    [print("%s) %s"%(i, a)) for i, a in enumerate(output)]
+  else:
+    print(output)
+  
+  decision = input("\nContinue? [Y/n]:\n")
+  if decision not in ['y','Y','yes']:
+    working = False
