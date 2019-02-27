@@ -20,20 +20,26 @@ def pointer_color(elevation):
   else:
     return "red"
 
-
 map = folium.Map(location=[38.58, -99.09], zoom_start=5, tiles="Mapbox Bright")
-fg = folium.FeatureGroup(name = "My Map")
+volcanoes = folium.FeatureGroup(name = "Volcanoes")
  
 for lt, ln, el, name in zip(lat, lon, elev, name):
     iframe = folium.IFrame(html=html % (name, name, el), width=200, height=100)
-    fg.add_child(folium.CircleMarker(location=[lt, ln],radius=6, popup=folium.Popup(iframe),fill_color = pointer_color(el), color='grey', fill_opacity=0.6))
+    volcanoes.add_child(folium.CircleMarker(location=[lt, ln],radius=6, popup=folium.Popup(iframe),fill_color = pointer_color(el), color='grey', fill_opacity=0.6))
  
-fg.add_child(folium.GeoJson(data=open('world.json', 'r', encoding='utf-8-sig').read(),
+populations = folium.FeatureGroup(name = "Word population")
+
+populations.add_child(folium.GeoJson(data=open('world.json', 'r', encoding='utf-8-sig').read(),
 style_function=lambda x: {'fillColor':'green' if x['properties']['POP2005'] < 10000000
 else 'orange' if 10000000 <= x['properties']['POP2005'] < 20000000 else 'red'}))
 
-fg.add_child(folium.GeoJson(data=(open("poland.json", "r", encoding="utf-8-sig").read())))
+poland = folium.FeatureGroup(name = "Poland administration")
 
-map.add_child(fg)
+poland.add_child(folium.GeoJson(data=(open("poland.json", "r", encoding="utf-8-sig").read())))
+
+for layer in [volcanoes, populations, poland]:
+  map.add_child(layer)
+
+map.add_child(folium.LayerControl())
 
 map.save("map.html")
