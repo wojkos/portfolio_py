@@ -26,7 +26,7 @@ fg = folium.FeatureGroup(name = "My Map")
  
 for lt, ln, el, name in zip(lat, lon, elev, name):
     iframe = folium.IFrame(html=html % (name, name, el), width=200, height=100)
-    fg.add_child(folium.Marker(location=[lt, ln], popup=folium.Popup(iframe), icon = folium.Icon(color = pointer_color(el))))
+    fg.add_child(folium.CircleMarker(location=[lt, ln],radius=6, popup=folium.Popup(iframe),fill_color = pointer_color(el), color='grey', fill_opacity=0.6))
  
 map.add_child(fg)
 
