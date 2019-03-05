@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Flask APP</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" type="text/css" media="screen" href={{url_for("static",filename="css/main.css")}} />
+  <!-- <script src="main.js"></script> -->
+</head>
+<body>
+  <header>
+    <div class="container">
+      <h1 class="logo">Wojo App</h1>
+      <strong>
+        <nav>
+          <ul class="menu">
+            <li><a href="{{ url_for('home') }}">Home</a></li>
+            <li><a href="{{ url_for('about') }}">About</a></li>
+          </ul>
+        </nav>
+      </strong>
+    </div>
+  </header>
+  <div class="container">
+    {%block content%}
+    {%endblock%}
+  </div>
+</body>
+</html>
