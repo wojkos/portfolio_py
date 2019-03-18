@@ -2,7 +2,7 @@ from django import forms
 from django.contrib.auth.models import User
 from basic_app.models import UserProfilefileInfo
 
-class UserForm(form.ModelForm):
+class UserForm(forms.ModelForm):
     password = forms.CharField(widget=forms.PasswordInput())
 
     class Meta():
